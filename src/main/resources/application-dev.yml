@@ -1,0 +1,34 @@
+spring:
+    datasource:
+        #schema: classpath*:scripts/schema.sql
+        #continue-on-error: false
+        #sql-script-encoding: utf-8
+        driver-class-name: com.mysql.cj.jdbc.Driver
+
+        url: jdbc:mysql://127.0.0.1:3306/db_mblog?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+        username: root
+        password: 980204
+        type: com.zaxxer.hikari.HikariDataSource
+        hikari.minimum-idle: 5
+        hikari.maximum-pool-size: 15
+        hikari.auto-commit: true
+        hikari.idle-timeout: 30000
+        hikari.pool-name: DatebookHikariCP
+        hikari.max-lifetime: 0 #不小于30s 否则会回到默认的1800秒
+        hikari.connection-timeout: 30000
+        hikari.connection-test-query: SELECT 1
+
+    flyway:
+        enabled: true
+    jpa:
+        database: mysql
+        show-sql: false
+        hibernate:
+            ddl-auto: update
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        properties:
+            hibernate.format_sql: true
+            hibernate.naming.physical-strategy: org.hibernate.scripts.model.naming.PhysicalNamingStrategyStandardImpl
+            hibernate.cache.use_second_level_cache: false
+            hibernate.search.default.directory_provider: filesystem
+            hibernate.search.default.indexBase: ${site.location}/storage/indexes
